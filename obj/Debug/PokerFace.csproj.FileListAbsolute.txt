@@ -1,0 +1,6 @@
+C:\Users\Administrator\Code\_Training\C#\PokerFace\PokerFace\bin\Debug\PokerFace.exe.config
+C:\Users\Administrator\Code\_Training\C#\PokerFace\PokerFace\obj\Debug\PokerFace.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Code\_Training\C#\PokerFace\PokerFace\bin\Debug\PokerFace.exe
+C:\Users\Administrator\Code\_Training\C#\PokerFace\PokerFace\bin\Debug\PokerFace.pdb
+C:\Users\Administrator\Code\_Training\C#\PokerFace\PokerFace\obj\Debug\PokerFace.exe
+C:\Users\Administrator\Code\_Training\C#\PokerFace\PokerFace\obj\Debug\PokerFace.pdb
