@@ -11,11 +11,11 @@ namespace PokerFace
         // card input is not provided
         public Card() { }
         // card has a suit and a rank input
-        public Card(char aSuit, int aRank)
-        {
-            suit = aSuit;
-            rank = aRank;
-        }
+        //public Card(char aSuit, int aRank)
+        //{
+        //    suit = aSuit;
+        //    rank = aRank;
+        //}
 
         public char suit; // c or h or d or s
         public int rank; // 2-10, j = 11, q = 12, k = 13, a = 14
@@ -26,32 +26,52 @@ namespace PokerFace
             return rank - c.rank;
         }
 
-        //public Card(string str)
-        //{
-        //    str = str.ToUpper();
-        //    foreach(char c in str)
-        //    {
-        //        switch (c)
-        //        {
-        //            case 'C':
-        //            case 'H':
-        //            case 'S':
-        //            case 'D':
-        //                suit = c;
-        //                break;
-        //            case 'T'
-        //                break;
-        //            case '2-9':
-        //                rank = c - '0';
-        //                break;
-        //        }
-        //    }
-        //    //if no rank or suit after forloop is done
-        //    if(rank == 0)
-        //        Console.WriteLine("You forgot the rank from " + str);
-        //    if (suit == 0)
-        //        Console.WriteLine("You forgot the suit from " + str);
-        //}
+        public Card(string str)
+        {
+            str = str.ToUpper();
+            foreach (char c in str)
+            {
+                switch (c)
+                {
+                    case 'C':
+                    case 'H':
+                    case 'S':
+                    case 'D':
+                        suit = c;
+                        break;
+                    case 'T':
+                        rank = 10;
+                        break;
+                    case 'J':
+                        rank = 11;
+                        break;
+                    case 'Q':
+                        rank = 12;
+                        break;
+                    case 'K':
+                        rank = 13;
+                        break;
+                    case 'A':
+                        rank = 14;
+                        break;
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                        rank = c - '0';
+                        break;
+                }
+            }
+            //if no rank or suit after forloop is done
+            if (rank == 0)
+                Console.WriteLine("You forgot the rank from " + str);
+            if (suit == 0)
+                Console.WriteLine("You forgot the suit from " + str);
+        }
 
         // could write function to check validity
         //bool IsValid()
@@ -68,17 +88,25 @@ namespace PokerFace
         {
             // Optimize: Card[] hand = GetHand()
 
-            Card[] hand = new Card[5]; // Placeholder for 5 cards
+            Console.WriteLine("Enter your poker hand in suit and rank pairs with a space between");
+            Console.WriteLine("for example: sk s3 h6 hj ck => ");
 
-            hand[0] = new Card('H', 10);
-            hand[1] = new Card('H', 10);
-            hand[2] = new Card('S', 10);
-            hand[3] = new Card('H', 9);
-            hand[4] = new Card('H', 9);
+            string input = Console.ReadLine();
+
+            //Card[] hand = new Card[5];
+            Card[] hand = GetHand(input); // Placeholder for 5 cards
+
+            Array.Sort(hand);
+
+            //hand[0] = new Card('H', 10);
+            //hand[1] = new Card('H', 10);
+            //hand[2] = new Card('S', 10);
+            //hand[3] = new Card('H', 9);
+            //hand[4] = new Card('H', 9);
 
             // Bonus: create function to build hand randomly
 
-            Array.Sort(hand);
+
 
             for (int k = 0; k < hand.Length; k++)
             {
@@ -119,6 +147,8 @@ namespace PokerFace
             {
                 Console.WriteLine("Pair!");
             }
+
+            // if no combinations, return high card
             else
             {
                 Card highCard = hand[hand.Length - 1];
@@ -129,27 +159,31 @@ namespace PokerFace
         }
 
         // Write function to get hand inputs from user
-        //static Card[] GetHand(string[] args)
-        //{
-        //    Card[] hand = new Card[5];
-        //    int index = 0;
+        static Card[] GetHand(string input)
+        {
+            Card[] hand = new Card[5];
 
-        //    foreach (string a in args)
-        //    {
-        //        // handle too many cards
-        //        if (index >= 5)
-        //            break;
-        //        // handle too few
-        //        // handle incorrect input
-        //        Card c = new Card(a);
-        //        hand[index++] = c;
-        //    }
+            string[] args = input.Split(new char[0]);
+            Console.WriteLine("args: " + args[0] + ", L:" + args.Length);
 
-        //    while(index < 5)
-        //    {
-        //        hand[index++] = Deal();
-        //    } 
-        //}
+            for (int i = 0; i < args.Length; i++)
+            {
+                // handle too many cards
+                if (i >= 5)
+                    break;
+                // handle too few
+                // handle incorrect input
+                Card c = new Card(args[i]);
+                hand[i] = c;
+                Console.WriteLine("idx: " + i + ", Card: " + hand[i].suit + ":" + hand[i].rank);
+            }
+            return hand;
+
+            //while (index < 5)
+            //{
+            //    hand[index++] = Deal();
+            //}
+        }
 
         //// static Card[] deck = new Card[52];
         //static Card[] deck = null;
@@ -244,7 +278,7 @@ namespace PokerFace
             //int falseCounter = 0;
             int trueCounter = 1;
 
-            for(int i = 0; i < hand.Length - 1; i++)
+            for (int i = 0; i < hand.Length - 1; i++)
             {
                 //if (hand[i].rank != hand[i + 1].rank)
                 //{
